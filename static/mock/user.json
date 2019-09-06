@@ -1,0 +1,35 @@
+{
+	"code": 1,
+	"data": {
+		"total": 3,
+		"dataList": [{
+			"id": 1,
+			"nickName": "啦啦啦啦",
+			"mobile": 18789894747,
+			"email": "88888888@qq.com",
+			"freeze": false,
+			"password": "123456",
+			"headImg": "",
+			"createTime": "2019-09-04"
+		}, {
+			"id": 2,
+			"nickName": "滴滴滴滴滴",
+			"mobile": 12334444444,
+			"email": "88888888@qq.com",
+			"freeze": false,
+			"password": "123456",
+			"headImg": "",
+			"createTime": "2019-09-04"
+		}, {
+			"id": 3,
+			"nickName": "哈哈哈哈",
+			"mobile": 1999999999,
+			"email": "77777777@qq.com",
+			"freeze": false,
+			"password": "123456",
+			"headImg": "",
+			"createTime": "2019-09-05"
+		}]
+	},
+	"msg": "Ok"
+}

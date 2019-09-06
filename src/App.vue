@@ -3,11 +3,17 @@
     <el-container>
       <el-header>
         <my-menu />
-      </el-header>
+      </el-header> 
+      <el-alert v-if="message"
+        class="alert-width"
+        :title="message"
+        @close="handleClose"
+        type="warning">
+      </el-alert> 
       <el-main class="clearfix"> 
         <router-view/>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>迷你影院</el-footer>
     </el-container> 
     <my-red :ok="ok" :redpic="redSrc"></my-red>
   </div>
@@ -27,11 +33,24 @@
     components: {
       "my-menu": MyMenu,
       "my-red": FixedRed
+    },
+    computed: {
+      message() {
+        return this.$store.state.globalMsg
+      }
+    },
+    methods: {
+      handleClose() {
+        console.log(123);
+      }
     }
   }
 </script>
  
 <style>
+  body{
+    background: #f5f5f5;
+  }
   .el-header, .el-footer {  
     text-align: center;
     line-height: 60px;
@@ -40,10 +59,12 @@
     background: #303133; color: #fff;
   }
   .el-footer{
-    background: #f5f5f5; color: #333;
+    background: #ccc; color: #333;
   }
-  .el-main {
-    background-color: #E9EEF3;
+  .alert-width{
+    width: 1200px; margin: 0 auto;
+  }
+  .el-main { 
     color: #333;
     min-height: 500px;
     text-align: center; 
@@ -52,5 +73,7 @@
   body > .el-container {
     margin-bottom: 40px;
   }
-    
+  .el-message{
+    background: #fff !important;
+  } 
 </style> 

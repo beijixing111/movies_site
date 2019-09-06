@@ -4,16 +4,16 @@
 			<p>扫码有红包和惊喜哦！</p>
 			<img :src="redpic" alt="红包"> 
 		</div>
-		<div class="fixed-ctx fixed-le">
+		<!-- <div class="fixed-ctx fixed-le">
 			<p>扫码有红包，更有惊喜哦！</p>
 			<img :src="redpic" alt="红包"> 
-		</div>
+		</div> -->
 	</div> 
 </template>
 
 <script> 
 	export default {
-		name: "红包",
+		name: "redbag",
 		props: {
 			ok: Boolean,
 			redpic: String

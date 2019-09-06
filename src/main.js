@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -14,6 +15,7 @@ Vue.use(ElementUI);
 /* eslint-disable no-new */
 new Vue({
   el: '#container',
+  store,
   router,
   components: { App },
   template: '<App/>'
