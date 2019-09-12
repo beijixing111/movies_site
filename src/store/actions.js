@@ -8,12 +8,12 @@ export default {
 	},
 	getHomeData({commit, state}) {
     // if(state.homeList != 0) return;
-    Axios.get("/api/list.json")
+    Axios.get("/api/movie")
     .then(res => {
-      console.log(res);
+      // console.log(res);
       let {code, data} = res.data;
       if(code == 1){
-        console.log(data);
+        // console.log(data);
         commit('getHomeData', { data: data})
       } 
     })
@@ -23,7 +23,7 @@ export default {
   },
   getMovieData({commit, state}) {
     // if(state.homeList != 0) return;
-    Axios.get("/api/movielist.json")
+    Axios.get("/api/movie")
     .then(res => {
       console.log(res);
       let {code, data} = res.data;

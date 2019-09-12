@@ -39,8 +39,8 @@
         if (value === '') {
           callback(new Error('请输入用户名'));
         } else { 
-        	if(value !== "test"){
-        		callback(new Error('请输入用户名test'));
+        	if(value !== "Beijixing"){
+        		callback(new Error('请输入用户名'));
         	}else{
         		callback();
         	} 
@@ -50,6 +50,11 @@
         if (value === '') {
           callback(new Error('请输入密码'));
         } else { 
+        	if(value !== "4896"){
+        		callback(new Error('请输入密码'));
+        	}else{
+        		callback();
+        	} 
           callback();
         }
       };

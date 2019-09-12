@@ -66,7 +66,7 @@
     },
     created() {
       console.log(this.id);
-      Axios.get("/api/list.json")
+      Axios.get("/api/movie")
         .then(res => {
           console.log(res);
           let {code, data} = res.data;
@@ -76,7 +76,8 @@
             let nowArr = this.dataList.filter(item => item.id == this.id); 
             console.log(nowArr);
             this.title = nowArr[0].name;
-            this.playerOptions.sources[0].src = nowArr[0].src;
+            // this.playerOptions.sources[0].src = nowArr[0].src;
+            this.playerOptions.sources[0].src = "https://www.mimyz.com/uploads/15E52256-234D-4C59-A4F2-58394274CE1B.MOV";
             this.playerOptions.poster = nowArr[0].poster;
           } 
         })

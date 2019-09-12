@@ -15,7 +15,7 @@
 		  <el-menu-item index="1" :route="{path: '/'}">首页</el-menu-item>
 		  <el-menu-item index="2" :route="{path: '/movies'}">电影</el-menu-item>
 		  <el-menu-item index="3" :route="{path: '/pics'}">图片</el-menu-item>
-		  <el-menu-item index="4" :route="{path: '/manager'}">管理</el-menu-item>
+		  <el-menu-item index="4" v-if="userInfo.loginStatus" :route="{path: '/manager'}">管理</el-menu-item>
 		  <el-menu-item index="5" :route="{path: '/about'}">关于</el-menu-item>
 		  <!-- <el-submenu index="2">
 		    <template slot="title">我的工作台</template>
