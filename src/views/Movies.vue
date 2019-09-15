@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<router-view/>
+		<router-view v-if="isRouterAlive" />
 		<div class="my-home" >
 			<movie-card :dataList="movieData.dataList" />
 		</div>
@@ -17,18 +17,31 @@
 		components: {
 			MovieCard
 		},
+		provide() {
+			return {
+				reload: this.reload
+			}
+		},
 	  data() {
 	    return { 
-	    	loading: true
+				loading: true,
+				isRouterAlive:true
 	    };
 	  }, 
 	  created () { 
-	    this.getMovieData();
+			this.getMovieData();
+			console.log(this.$router.history.current.params);
 	  },
 	  computed: {
 	  	movieData() { 
-	  		let movieList = this.$store.state.movieList
-	  		console.log(this.$store.state);
+				let movieList = this.$store.state.movieList;
+				var id = this.$router.history.current.params.id;
+				if(id) { 
+					movieList = movieList.filter(item => {
+						return item.id != id; 
+					}); 
+				}
+	  		// console.log(this.$store.state);
 	  		return {
 	  			total: movieList.length,
 	  			dataList: movieList
@@ -36,7 +49,13 @@
 	  	}
 	  },
 	  methods: {
-	    ...mapActions(["getMovieData"])
+			...mapActions(["getMovieData"]),
+			reload (){
+       this.isRouterAlive = false
+       this.$nextTick(function(){
+          this.isRouterAlive = true
+       })
+    }
 	  } 
 	}
 </script>

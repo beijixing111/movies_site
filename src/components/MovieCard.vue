@@ -15,8 +15,8 @@
 			    			<span>类型：{{item.type}}</span>
 			    			<span>导演：{{item.owner}}</span>
 			    		</p>
-			    	</div>
-			      <div class="desc-text">简介：{{!!item.desc ? item.desc : "暂无信息..."}}</div> 
+							<div class="desc-text">简介：{{!!item.desc ? item.desc : "暂无信息..."}}</div> 
+			    	</div> 
 			    </el-card>
 			  </router-link>
 		  </el-col>
@@ -47,13 +47,13 @@
   	overflow: hidden;
   	position: relative;
   	.wrapper{
-			height: 190px;
+			height: 100%;
   	}
   	.movie-info{
-  		position: absolute;
-  		top: 100px;
+  		position: absolute; 
   		left: 0;
-  		right: 0;
+			right: 0;
+			bottom: 0;
   		height: 90px;
   		box-sizing: border-box;
   		display: flex;
@@ -61,12 +61,11 @@
   		flex-direction: column;
   		background: rgba(0,0,0,.5);
   		color: #fff;
-  		padding: 10px 15px;
+			padding: 10px 15px; 
   		p{
-  			font-size: 14px;
+  			font-size: 14px; line-height: 20px;
   			&:first-child{
-  				font-size: 16px; font-weight: bold; 
-  				margin-bottom: 10px;
+  				font-size: 16px; font-weight: bold;  
   			}
   			span{
   				margin-right: 15px;
@@ -74,7 +73,7 @@
   		}
   	}
   	.desc-text{
-	  	font-size: 12px; padding: 0 14px;
+	  	font-size: 12px;
 	  	line-height: 18px; text-align: left;
 	  }
   } 

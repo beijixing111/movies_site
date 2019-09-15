@@ -27,7 +27,7 @@
     data() {
       return {
         redSrc: '/static/images/red.jpg', 
-        ok: false
+        ok: true
       }
     },
     components: {
@@ -59,7 +59,8 @@
     background: #303133; color: #fff;
   }
   .el-footer{
-    background: #ccc; color: #333;
+    background: #ccc; color: #333; position: fixed;
+    left: 0; right: 0; bottom: 0;
   }
   .alert-width{
     width: 1200px; margin: 0 auto;
@@ -68,11 +69,10 @@
     color: #333;
     min-height: 500px;
     text-align: center; 
+    margin-bottom: 60px;
   }
   
-  body > .el-container {
-    margin-bottom: 40px;
-  }
+ 
   .el-message{
     background: #fff !important;
   } 

@@ -26,7 +26,12 @@
 	  },
 	  computed: {
 	  	homeData() { 
-	  		let homeList = this.$store.state.homeList
+	  		let homeList = this.$store.state.homeList.map(item => {
+					if(!item.poster) {
+						item.poster = '../../static/images/poster.png';
+					}
+					return item;
+				})
 	  		console.log(this.$store.state);
 	  		return {
 	  			total: homeList.length,

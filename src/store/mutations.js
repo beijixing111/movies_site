@@ -26,7 +26,7 @@ export const mutations = {
 		} 
 	},
 	getHomeData (state, data) {
-		console.log(data);
+		console.log(data); 
 		state.homeList = [].concat(data.data.dataList); 
 	},
 	getMovieData (state, data) {

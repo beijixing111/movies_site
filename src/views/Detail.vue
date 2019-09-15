@@ -1,39 +1,25 @@
 <template>
 	<div class="my-video" :style="!title ? 'display: none' : ''">
 		<h3 class="title">片名：{{title}}</h3>
-    <div class="video-wraper">
-      <video-player
-          class="video video-player vjs-custom-skin"
-          ref="videoPlayer" 
-          :playsinline="true" 
-          :options="playerOptions"
-          @play="onPlayerPlay($event)"
-          @pause="onPlayerPause($event)" 
-          @loadeddata="onPlayerLoadeddata($event)" 
-          @canplay="onPlayerCanplay($event)"  
-          @statechanged="playerStateChanged($event)"
-          @ready="playerReadied">
-        > 
-      </video-player>
-      <!-- 
-         @ended="onPlayerEnded($event)"
-          @waiting="onPlayerWaiting($event)"
-          @playing="onPlayerPlaying($event)"
-          @canplaythrough="onPlayerCanplaythrough($event)"
-          @timeupdate="onPlayerTimeupdate($event)"
-       -->
-      <div class="right-info">
-         暂无信息
+    <div class="video-wraper"> 
+      <video id='my-video' ref="video" class='video-js ' controls preload='auto' width='640' height='264'
+        data-setup='{}'>
+        <source :src="playerOptions.sources.src" :type="playerOptions.sources.type">
+        <p class='vjs-no-js'>
+          To view this video please enable JavaScript, and consider upgrading to a web browser that
+          <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
+        </p>
+      </video>
+      <div class="right-info"> 
+        <!-- <p>加载不了，点此处按钮重试一下</p> -->
+        <!-- <el-button  @click="ajaxData">重试</el-button>  -->
       </div>
     </div> 
 	</div>
 </template>
 
-<script>
-  import { videoPlayer } from 'vue-video-player';
-  import Axios from 'axios';
-  require('../../node_modules/video.js/dist/video-js.min.css'); 
-  require('../../node_modules/vue-video-player/src/custom-theme.css'); 
+<script> 
+  import Axios from 'axios'; 
 	export default {
 		props: ["id"],
     data () {
@@ -42,31 +28,31 @@
         playerOptions : {
           playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度  
           autoplay: false,  
-          preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持） 
-          aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"） 
-          sources: [{
-            type: "video/mp4",
-            src: "" //url地址
-          }],
+          preload: 'auto', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"） 
           poster: "", //你的封面地址
-          // width: document.documentElement.clientWidth, //播放器宽度
-          notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
-          controlBar: {
-            timeDivider: true,
-            durationDisplay: true,
-            remainingTimeDisplay: false,
-            fullscreenToggle: true  //全屏按钮
-          }
- 
+          sources: {
+            type: "application/x-mpegURL",
+            src: "" //url地址
+          } 
         }
       }
     },
-    components: {
-      videoPlayer
-    },
     created() {
-      console.log(this.id);
-      Axios.get("/api/movie")
+      console.log(this.id); 
+    },
+    mounted() {
+      // console.log(this.$refs.video.id); 
+      
+      this.ajaxData();
+    },
+
+    computed: {
+       
+    },
+    methods: {
+      // listen event
+      ajaxData() {
+        Axios.get("/api/movie")
         .then(res => {
           console.log(res);
           let {code, data} = res.data;
@@ -76,51 +62,23 @@
             let nowArr = this.dataList.filter(item => item.id == this.id); 
             console.log(nowArr);
             this.title = nowArr[0].name;
-            // this.playerOptions.sources[0].src = nowArr[0].src;
-            this.playerOptions.sources[0].src = "https://www.mimyz.com/uploads/15E52256-234D-4C59-A4F2-58394274CE1B.MOV";
+            this.playerOptions.sources.src = nowArr[0].src;
+            // this.playerOptions.sources.src = "https://www.mimyz.com/uploads/15E52256-234D-4C59-A4F2-58394274CE1B.MOV";
             this.playerOptions.poster = nowArr[0].poster;
+            var videoId = document.getElementById("my-video");
+            var source = videoId.querySelector("source");
+            source.src = nowArr[0].src;
+            this.$refs.video.src = nowArr[0].src;
+            var player = videojs(videoId); 
+            player.play();  
           } 
         })
         .catch(err => {
           console.log(err);
         })
-       
-    },
-    mounted() {
-      console.log('this is current player instance object', this.player)
-    },
-
-    computed: {
-      player() {
-        return this.$refs.videoPlayer.player
       }
-    },
-    methods: {
-      // listen event
-      onPlayerPlay(player) {
-        console.log('player play!', player)
-      },
-      onPlayerPause(player) {
-        console.log('player pause!', player)
-      }, 
-      // ...player event
 
-      // or listen state event
-      playerStateChanged(playerCurrentState) {
-        // console.log('player current update state', playerCurrentState)
-      },
-      onPlayerLoadeddata(player) {
-        console.log("player");
-      },
-      onPlayerCanplay() {
-
-      },
-      // player is ready
-      playerReadied(player) {
-        console.log('the player is readied', player)
-        // you can use it to do something...
-        // player.[methods]
-      }
+     
     }
 	}
 
@@ -146,6 +104,12 @@
         display: flex; flex: auto;
         margin-left: 15px;
       }
+    }
+    .vjs-custom-skin > .video-js .vjs-big-play-button{
+      width: 2em;
+      height: 2em;
+      border-radius: 50% 1important;
+      border: 1px solid #fff;
     }
 	}
 </style>
