@@ -63,8 +63,8 @@
 			}
 			return {
 				title: "视频上传", 
-				// linkadr: 'http://47.107.140.238:3003/uploadfile',
-				linkadr: 'http://localhost:3003/uploadfile',
+				linkadr: 'http://47.107.140.238:3003/uploadfile',
+				// linkadr: 'http://localhost:3003/uploadfile',
 				options: opts,
         movietype: '',
         moviename: '',  

@@ -3,7 +3,8 @@
 		<div class="logo">
 			<router-link to="/" class="logo-text">迷你影院</router-link>	
 		</div>
-		<el-menu :default-active="activeIndex" 
+		<el-menu 
+			:default-active="activeIndex" 
 			background-color="#303133" 
 			class="el-menu-demo my-menu" 
 			mode="horizontal" 
@@ -12,11 +13,14 @@
 			text-color="#fff"
 			active-text-color="#fff"
 			> 
-		  <el-menu-item index="1" :route="{path: '/'}">首页</el-menu-item>
+		  <el-menu-item v-for="item in dataRoute" :index="item.path" :route="{path: item.path}"
+		   v-if="item.path != '/manager'">{{item.label}}</el-menu-item>
+		   <el-menu-item index="/manager" v-if="userInfo.loginStatus" :route="{path: '/manager'}">管理</el-menu-item>
+		  <!-- 
 		  <el-menu-item index="2" :route="{path: '/movies'}">电影</el-menu-item>
 		  <el-menu-item index="3" :route="{path: '/pics'}">图片</el-menu-item>
-		  <el-menu-item index="4" v-if="userInfo.loginStatus" :route="{path: '/manager'}">管理</el-menu-item>
-		  <el-menu-item index="5" :route="{path: '/about'}">关于</el-menu-item>
+		  
+		  <el-menu-item index="5" :route="{path: '/about'}">关于</el-menu-item> -->
 		  <!-- <el-submenu index="2">
 		    <template slot="title">我的工作台</template>
 		    <el-menu-item index="2-1">选项1</el-menu-item>
@@ -45,8 +49,27 @@
   export default {
     data() {
       return {
-        activeIndex: '1', 
-        visibility: false, 
+        activeIndex: '/', 
+        visibility: false,
+        dataRoute: [
+        	{
+        		path: '/',
+        		label: '首页'
+        	},
+        	{
+        		path: '/movies',
+        		label: '电影'
+        	},{
+        		path: '/pics',
+        		label: '图片'
+        	},{
+        		path: '/manager',
+        		label: '管理'
+        	},{
+        		path: '/about',
+        		label: '关于'
+        	}
+        ] 
       };
     },
     components: {
@@ -54,6 +77,7 @@
     },
     mounted: function() {
     	this.chenckLogin();
+    	this.activeIndex = window.location.hash.replace('#', '');
     },
     computed: {
     	userInfo() {
@@ -114,6 +138,9 @@
 	.my-header{
 		width: 1200px; margin: 0 auto; 
 		position: relative; 
+		.el-dialog{
+			max-width: 540px !important;
+		}
 	}
 	.my-menu{
 		background: none; color: #fff; 

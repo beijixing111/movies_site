@@ -34,14 +34,17 @@
 	  },
 	  computed: {
 	  	movieData() { 
-				let movieList = this.$store.state.movieList;
-				var id = this.$router.history.current.params.id;
-				if(id) { 
-					movieList = movieList.filter(item => {
-						return item.id != id; 
-					}); 
-				}
-	  		// console.log(this.$store.state);
+	  		let id = this.$router.history.current.params.id;
+	  		let movieList = [];
+				this.$store.state.movieList.map(item => {
+					if(!item.poster) {
+						item.poster = '../../static/images/poster.png';
+					}
+					if(item.id != id){
+						movieList.push(item);
+					}
+				});
+				  
 	  		return {
 	  			total: movieList.length,
 	  			dataList: movieList

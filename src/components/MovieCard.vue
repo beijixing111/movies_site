@@ -47,7 +47,7 @@
   	overflow: hidden;
   	position: relative;
   	.wrapper{
-			height: 100%;
+			height: 100%; width: 100%;
   	}
   	.movie-info{
   		position: absolute; 
@@ -63,7 +63,8 @@
   		color: #fff;
 			padding: 10px 15px; 
   		p{
-  			font-size: 14px; line-height: 20px;
+  			font-size: 14px; line-height: 20px; 
+  			margin-bottom: 8px;
   			&:first-child{
   				font-size: 16px; font-weight: bold;  
   			}

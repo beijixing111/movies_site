@@ -38,7 +38,7 @@ export default {
   },
   getPicData({commit, state}) {
     // if(state.homeList != 0) return;
-    Axios.get("/api/piclist.json")
+    Axios.get("/api/movie")
     .then(res => {
       console.log(res);
       let {code, data} = res.data;

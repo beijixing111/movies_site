@@ -45,7 +45,12 @@
 	  },
 	  computed: {
 	  	picData() { 
-	  		let picData = this.$store.state.picList 
+	  		let picData = this.$store.state.picList.map(item => {
+	  			if(!item.poster) {
+						item.poster = '../../static/images/poster.png';
+					}
+					return item;
+	  		}) 
 	  		return {
 	  			total: picData.length,
 	  			picList: picData
@@ -119,7 +124,7 @@
       clear: both
   }
   .diag-pic{
-  	background: #ccc;
+  	background: #fadbfe;
   	.el-dialog__header{ 
   		padding: 0;
   	}

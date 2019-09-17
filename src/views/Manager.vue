@@ -3,7 +3,7 @@
 		<el-row class="tac">
 		  <el-col :span="4" > 
 		    <el-menu
-			      default-active="1"
+			      :default-active="activeIndex"
 			      class="el-menu-vertical-demo"
 			      @select="handleSelect" 
 			      @open="handleOpen"
@@ -67,6 +67,9 @@
       return {
         activeIndex: '1'
       };
+    },
+    mounted() {
+    	this.activeIndex = window.location.pathname;
     },
 		methods: {
       handleOpen(key, keyPath) {

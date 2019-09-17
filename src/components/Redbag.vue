@@ -33,7 +33,7 @@
 			left: 0;
 		}
 		&.fixed-rig{
-			right: 0;
+			right: 10px;
 		} 
 		p{
 			font-size: 12px;
