@@ -28,7 +28,7 @@
 	  	homeData() { 
 	  		let homeList = this.$store.state.homeList.map(item => {
 					if(!item.poster) {
-						item.poster = '../../static/images/poster.png';
+						item.poster = './static/images/default_movie.png';
 					}
 					return item;
 				})

@@ -1,7 +1,9 @@
 <template>
 	<div class="my-header">
 		<div class="logo">
-			<router-link to="/" class="logo-text">迷你影院</router-link>	
+			<router-link to="/" class="logo-text">
+				<img :src="logoPic" alt="">
+			</router-link>	
 		</div>
 		<el-menu 
 			:default-active="activeIndex" 
@@ -13,7 +15,7 @@
 			text-color="#fff"
 			active-text-color="#fff"
 			> 
-		  <el-menu-item v-for="item in dataRoute" :index="item.path" :route="{path: item.path}"
+		  <el-menu-item v-for="item in dataRoute" :key="item.path" :index="item.path" :route="{path: item.path}"
 		   v-if="item.path != '/manager'">{{item.label}}</el-menu-item>
 		   <el-menu-item index="/manager" v-if="userInfo.loginStatus" :route="{path: '/manager'}">管理</el-menu-item>
 		  <!-- 
@@ -36,7 +38,7 @@
 		  
 		</el-menu>
 		<div class="login-info">
-			<el-button v-if="!userInfo.loginStatus" @click="toggleLogin(true)">登录</el-button>
+			<el-button class="login" v-if="!userInfo.loginStatus" @click="toggleLogin(true)">登录</el-button>
 			<span v-else>Hi，{{userInfo.nickName}}<span @click="loginOut" class="login-out">退出</span></span>
 		</div>
 		<mm-login :visibility="visibility" @closeLogin="toggleLogin" />
@@ -51,6 +53,7 @@
       return {
         activeIndex: '/', 
         visibility: false,
+        logoPic: './static/images/mimyz.png',
         dataRoute: [
         	{
         		path: '/',
@@ -61,7 +64,7 @@
         		label: '电影'
         	},{
         		path: '/pics',
-        		label: '图片'
+        		label: '美图'
         	},{
         		path: '/manager',
         		label: '管理'
@@ -122,18 +125,27 @@
 		position: absolute;
 		left: 0;
 		top: 4px;
-		width: 100px;
+		width: 120px;
 		height: 50px; 
 		border-radius: 5px;
 		z-index: 99; 
 		display: flex;
 		justify-content: center;
-		align-items: center;
-		box-shadow: 0 0 5px #ccc;
+		align-items: center; 
 	}
 	.logo-text{
-		font-size: 16px;
-		color: #fff;
+		display: block; width: 100%; height: 100%; 
+		img{
+			display: block; width: 100%;
+		}
+	}
+	.login{
+		background: #409EFF !important;
+		color: #fff !important;
+		&:hover{
+			background: #409EFF !important; 
+			color: #fff !important;
+		}
 	}
 	.my-header{
 		width: 1200px; margin: 0 auto; 
@@ -156,17 +168,16 @@
 		top: 0;
 		line-height: 60px;
 		font-size: 14px;
-		color: #e9287f;
+		color: #519eff;
  	}
  	.login-out{
- 		margin-left: 10px;
- 		color: #fff; 
- 		font-size: 16px;
+ 		margin-left: 10px; 
+ 		font-size: 14px;
  		cursor: pointer;
+ 		padding: 5px 10px;
+    background: #519eff;
+    color: #fff;
+    border-radius: 5px;
  	}
- 	.el-message-box__btns{
- 		.el-button{
- 			margin: 0 15px;
- 		}
- 	}
+ 	
 </style>

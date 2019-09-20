@@ -38,7 +38,7 @@
 	  		let movieList = [];
 				this.$store.state.movieList.map(item => {
 					if(!item.poster) {
-						item.poster = '../../static/images/poster.png';
+						item.poster = './static/images/default_movie.png';
 					}
 					if(item.id != id){
 						movieList.push(item);

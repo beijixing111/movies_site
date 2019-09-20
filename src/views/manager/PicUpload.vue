@@ -13,10 +13,20 @@
 			    </el-option>
 			  </el-select>
 			</div>
+			<div style="margin-bottom:20px; width: 400px;">
+				<el-input 
+				  type="textarea"
+				  :rows="2"
+				  placeholder="图片描述"
+				  v-model="desc">
+				</el-input>
+			</div> 
 			<div style="margin-bottom:30px;">
 				<el-upload
 				  class="upload-demo"
-				  action=""
+				  action="/api/uploadPic"
+				  multiple
+				  :data="{type: value, uploader: uploader, desc: desc}"
 				  :on-preview="handlePreview"
 				  :on-remove="handleRemove"
 				  :file-list="fileList"
@@ -28,7 +38,6 @@
 				  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 				</el-upload>
 			</div>
-			<el-button style=" width: 80px;" type="primary" @click="handleSubmit">提 交</el-button>
 		</div>
 	</div>
 </template>
@@ -49,8 +58,13 @@
         }, {
           value: '3',
           label: '萌宠'
+        }, {
+        	value: '4',
+        	label: '美女'
         }],
-        value: ''
+        value: '1',
+        uploader: '北极星',
+        desc: '啦啦啦啦啦'
 			}
 		},
 		methods: {
@@ -67,10 +81,7 @@
       	console.log(err, file, fileList);
       },
       handleChange(file, fileList) {
-      	console.log(file, fileList);
-      },
-      handleSubmit() {
-      	console.log(this.value);
+      	console.log(file, fileList);  
       }
     }
 	}

@@ -13,7 +13,7 @@
       <el-main class="clearfix"> 
         <router-view/>
       </el-main>
-      <el-footer>迷你影院</el-footer>
+      <el-footer>Mimyz</el-footer>
     </el-container> 
     <my-red :ok="ok" :redpic="redSrc"></my-red>
   </div>
@@ -59,7 +59,8 @@
     background: #303133; color: #fff;
   }
   .el-footer{
-    background: #ccc; color: #333; position: fixed;
+    background: rgba(0,0,0,.2); 
+    color: #333; position: fixed;
     left: 0; right: 0; bottom: 0;
   }
   .alert-width{
@@ -71,9 +72,24 @@
     text-align: center; 
     margin-bottom: 60px;
   }
-  
- 
+   
   .el-message{
     background: #fff !important;
-  } 
+  }
+  .diag-pic{
+    background: #fff;
+    .el-dialog__header{ 
+      padding: 0;
+    }
+    .el-dialog__headerbtn{
+      top: 5px;
+      right: 5px;
+      font-size: 16px;
+    }
+  }
+  .el-message-box__btns{
+    .el-button{
+      margin: 0 15px;
+    }
+  }
 </style> 

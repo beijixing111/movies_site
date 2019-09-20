@@ -1,9 +1,9 @@
 <template>
 	<div class="my-home">
 		<el-row :gutter="20" class="clearfix">
-			  <el-col :span="6" v-for="(item, index) in picData.picList" :key="item.id" >
+			  <el-col :span="6" v-for="(item, index) in picData.picList" :key="item.fileName" >
 			  	<el-card class="pic-box" :body-style="{ padding: '0px' }">  
-			      <el-image :src="item.poster" @click="browerPic(item.poster)">
+			      <el-image :src="item.fileSrc" @click="browerPic(item.fileSrc)" class="wrapper">
 				      <div slot="placeholder" class="image-slot">
 				        加载中<span class="dot">...</span>
 				      </div>
@@ -15,8 +15,7 @@
 				custom-class="diag-pic"
 			  :visible.sync="dialogVisible"
 			  :width="imgWidth"
-			  :before-close="handleClose">
-
+			  :before-close="handleClose"> 
 			  <div>
 			  	<el-image :src="picSrc">
 			      <div slot="placeholder" class="image-slot">
@@ -29,6 +28,32 @@
 </template>
 
 <script>
+
+	function factorial(n, total ) {
+	  if (n === 1) return total;
+	  return factorial(n - 1, n * total);
+	} 
+
+	function factorial1(n, start =1, total = 1) {
+		if(n <= 2) {
+			return total;
+		}
+		return factorial1(n-1, total, total + start);
+	}
+
+	let a = [1,2,3, [1,2,3, [1,2,3]]];
+	// 数组扁平实现
+	function flat(arr = [], result = []) {
+		arr.forEach(v => {
+			if(Array.isArray(v)) {
+				result = result.concat(flat(v, []))
+			}else{
+				result.push(v);
+			}
+		})
+		return result;
+	}
+
 	import { mapActions } from 'vuex';
 	export default {
 		name: "pics",
@@ -46,8 +71,8 @@
 	  computed: {
 	  	picData() { 
 	  		let picData = this.$store.state.picList.map(item => {
-	  			if(!item.poster) {
-						item.poster = '../../static/images/poster.png';
+	  			if(!item.fileSrc) {
+						item.fileSrc = './static/images/default_movie.png';
 					}
 					return item;
 	  		}) 
@@ -99,7 +124,14 @@
     margin-top: 13px;
     line-height: 12px;
   }
-
+	.el-card__body{
+  	height: 300px;
+  	overflow: hidden;
+  	position: relative;
+  	.wrapper{
+			height: 100%; width: 100%;
+  	}
+  }	
   .button {
     padding: 0;
     float: right;
@@ -121,17 +153,7 @@
   	text-align: left; line-height: 20px;
   }
   .clearfix:after {
-      clear: both
+    clear: both
   }
-  .diag-pic{
-  	background: #fadbfe;
-  	.el-dialog__header{ 
-  		padding: 0;
-  	}
-  	.el-dialog__headerbtn{
-  		top: 5px;
-  		right: 5px;
-  		font-size: 16px;
-  	}
-  }
+  
 </style>
