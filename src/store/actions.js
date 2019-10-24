@@ -1,14 +1,56 @@
 
-import Axios from 'axios';
 
+import * as Apis from '../apis'; 
 export default {
-
-	login ({commit}, userinfo) { 
-		commit('login', userinfo);
+  getMenuInfo ({commit, state}) {
+    Apis.getMenuInfo({
+      loginStatus: state.userInfo.loginStatus ? 1 : 0
+    }) 
+    .then(res => {
+      let {code, data} = res.data;
+      if(code == 1){
+        console.log(data);
+        commit('getMenuInfo', { data: data})
+      } 
+    })
+  },
+	login ({commit, state, dispatch}, userinfo) { 
+    if(userinfo && userinfo.out) {
+      state.userInfo.loginStatus = false;
+      dispatch('getMenuInfo');
+      return commit('login', userinfo);
+    }
+    let userInfo = localStorage.getItem("userInfo");
+    if(userInfo){
+      userInfo = JSON.parse(userInfo);
+      state.userInfo.loginStatus = userInfo.loginStatus;
+      state.userInfo.nickName = userInfo.nickName;
+      dispatch('getMenuInfo');
+      return;
+    }
+    if(!userinfo){
+      return dispatch('getMenuInfo'); 
+    }      
+    Apis.login({
+      username: userinfo.name,
+      password: userinfo.pass
+    })
+    .then(res => {
+      console.log(res);
+      let {code, data} = res.data;
+      if(code == 1){
+        commit('login', data);
+        state.userInfo.loginStatus = true;
+        dispatch('getMenuInfo');
+      }else {
+        console.log('出错了！');
+      }
+    })
+		
 	},
 	getHomeData({commit, state}) {
     // if(state.homeList != 0) return;
-    Axios.get("/api/movie")
+    Apis.getMovieData()
     .then(res => {
       // console.log(res);
       let {code, data} = res.data;
@@ -23,7 +65,7 @@ export default {
   },
   getMovieData({commit, state}) {
     // if(state.homeList != 0) return;
-    Axios.get("/api/movie")
+    Apis.getMovieData()
     .then(res => {
       console.log(res);
       let {code, data} = res.data;
@@ -38,7 +80,7 @@ export default {
   },
   getPicData({commit, state}) {
     // if(state.homeList != 0) return;
-    Axios.get("/api/pic")
+    Apis.getPicData()
     .then(res => {
       console.log(res);
       let {code, data} = res.data;
@@ -102,5 +144,14 @@ export default {
 		.catch(err => {
 			console.log(err);
 		})
-	}
+	},
+  //;
+  updateRoutePath({commit}, path) {
+    console.log(path); 
+    let _path = window.location.hash.replace(/^#(\/\w+)\/?.*/g, '$1');
+    _path = _path.replace('#', '');
+    commit('updateRoutePath', {
+      path: path ? path : _path
+    })
+  }
 }

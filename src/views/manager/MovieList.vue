@@ -1,9 +1,7 @@
 <template> 
 	<div style="padding: 20px;">
 		<div class="page-title">
-			<div class="">
-				{{title}}
-			</div>
+			<div class=""> {{title}}</div>
 			<div class="right"> 
 				<el-input placeholder="请输入内容" v-model="searchType" class="input-with-select">
 			    <el-button slot="append" icon="el-icon-search" @click="handleRefresh"></el-button>
@@ -108,9 +106,9 @@
 	</div>
 </template>
 
-<script>
-	import Axios from 'axios';
-	import timeFormat from '../../utils/timeFormat.js';
+<script> 
+	import timeFormat from '@/utils/timeFormat.js';
+	import * as Apis from '@/apis'; 
 	export default {
 		name: 'Movieslist',
 		data() { 
@@ -155,7 +153,7 @@
 		},
 		methods: {
 			getMovieList() {
-				Axios.get("/api/movie")
+				Apis.getMovieData()
 		    .then(res => {
 		      console.log(res);
 		      let {code, data} = res.data;
@@ -213,7 +211,7 @@
 				this.form = JSON.parse(JSON.stringify(row)); 
 			},
 			handleEditSubmit() {  
-				Axios.put("/api/movie", this.form)
+				Apis.putMovieData(this.form)
 		    .then(res => {
 		      console.log(res);
 		      let {code, data, msg} = res.data;
@@ -240,8 +238,25 @@
 		    	this.$message.error("出现错误！"); 
 		    })
 			},
-			handleDelete() {
-				this.$message("暂不支持！"); 
+			handleDelete(index, row) {
+				// this.$message("暂不支持！"); 
+				console.log(row); 
+				this.$confirm('确定要删除么?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          center: true
+        }).then(() => {
+        	Apis.deleteMovieData({id: row.id})
+					.then(res => {
+						console.log(res);
+						let { code, msg } = res.data;
+						this.$message.success(msg); 
+					})
+					.catch(err => {
+						this.$message.error("出现错误！"); 
+					})
+        })
+				
 			}
 		}
 	}

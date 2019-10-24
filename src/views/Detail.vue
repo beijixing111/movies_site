@@ -1,7 +1,7 @@
 <template>
 	<div class="my-video" :style="!title ? 'display: none' : ''">
 		<h3 class="title">片名：{{title}}</h3>
-    <div class="video-wraper"> 
+    <div class="video-wraper vjs-custom-skin"> 
       <video id='my-video' ref="video" class='video-js ' controls preload='auto' width='640' height='264'
         data-setup='{}'>
         <source :src="playerOptions.sources.src" :type="playerOptions.sources.type">
@@ -11,6 +11,7 @@
         </p>
       </video>
       <div class="right-info"> 
+        <p>此处内容为空</p>
         <!-- <p>加载不了，点此处按钮重试一下</p> -->
         <!-- <el-button  @click="ajaxData">重试</el-button>  -->
       </div>
@@ -19,7 +20,8 @@
 </template>
 
 <script> 
-  import Axios from 'axios'; 
+  import * as Apis from '../apis'; 
+  import { mapActions } from 'vuex';
 	export default {
 		props: ["id"],
     data () {
@@ -41,18 +43,26 @@
       console.log(this.id); 
     },
     mounted() {
-      // console.log(this.$refs.video.id); 
+      console.log(this.$refs.video.id); 
       
       this.ajaxData();
+      this.updateRoutePath(); 
+      console.log( window.location.hash);
     },
-
+    watch:{
+      $route(to,from){
+        console.log(this.id, to, from); 
+        this.ajaxData();
+      }
+    },
     computed: {
        
-    },
+    }, 
     methods: {
+      ...mapActions(["updateRoutePath"]),
       // listen event
       ajaxData() {
-        Axios.get("/api/movie")
+        Apis.getMovieData() 
         .then(res => {
           console.log(res);
           let {code, data} = res.data;
@@ -70,11 +80,8 @@
             source.src = nowArr[0].src;
             this.$refs.video.src = nowArr[0].src;
             var player = videojs(videoId); 
-            player.play();  
+            // player.play();  
           } 
-        })
-        .catch(err => {
-          console.log(err);
         })
       }
 
@@ -88,7 +95,7 @@
 <style lang="less">
 	.title{
 		padding: 15px 0; color: #333;
-		text-align: left; 
+		text-align: left; font-weight: bold;
 	}
 	.my-video{
 		width: 1200px;
@@ -98,18 +105,12 @@
       justify-content: space-between; 
       .video{ 
         width: 700px; flex: none; 
-        display: flex; 
+        display: flex; height: 280px;
       }
       .right-info{
         display: flex; flex: auto;
         margin-left: 15px;
       }
-    }
-    .vjs-custom-skin > .video-js .vjs-big-play-button{
-      width: 2em;
-      height: 2em;
-      border-radius: 50% 1important;
-      border: 1px solid #fff;
-    }
+    } 
 	}
 </style>

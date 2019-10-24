@@ -23,11 +23,121 @@
     <title>Mimyz</title>
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"> 
     <link rel="stylesheet" href="/static/reset.css">  
-    <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/video-js.css">
     <link rel="stylesheet" href="/static/css/scrollbar.css">
+    <style>
+      .vjs-custom-skin > .video-js .vjs-big-play-button{
+        width: 2em; height: 2em;
+        border-radius: 50% !important;
+        border: 1px solid #fff;  line-height: 2em;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .load-animate{
+        position: fixed; top: 0; left: 0;
+        right: 0; bottom: 0; display: flex;
+        justify-content: center; 
+        align-items: center; background: #f5f5f5;
+      }
+      .load-animate .loading-text{
+        margin-left: 15px; font-size: 14px;
+        color: #888;
+      }
+      .ani-container{
+        width: 30px; height: 30px;
+        position: relative;
+      } 
+      .ani-container .shape{
+        position: absolute; width: 10px;
+        height: 10px; border-radius: 1px;
+      }
+      .ani-container .shape.shape1{
+        left: 0; 
+        background: #5c6bc0;
+      }
+      .ani-container .shape.shape2{
+        right: 0;
+        background-color: #8BC34A;
+      }
+      .ani-container .shape.shape3{
+        bottom: 0;
+        background-color: #FFB74D;
+      }
+      .ani-container .shape.shape4{
+        bottom: 0; right: 0;
+        background-color: #F44336;
+      }
+      .ctx-2{
+        animation: rotation 1s infinite;
+      }
+      @keyframes rotation {
+        from {
+          transform: rotate(0);
+        }
+        to{
+          transform: rotate(360deg);
+        }
+      }
+      .ctx-2 .shape{
+        border-radius: 5px;
+      }
+      .ctx-2 .shape1{
+        animation: ctx2shape1 0.5s ease 0s infinite alternate;
+      }
+      .ctx-2 .shape2{
+        animation: ctx2shape2 0.5s ease 0s infinite alternate;
+      }
+      .ctx-2 .shape3{
+        animation: ctx2shape3 0.5s ease 0s infinite alternate;
+      }
+      .ctx-2 .shape4{
+        animation: ctx2shape4 0.5s ease 0s infinite alternate;
+      }
+      @keyframes ctx2shape1 {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(20px,20px);
+        }
+      }
+      @keyframes ctx2shape2 {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(-20px,20px);
+        }
+      }
+      @keyframes ctx2shape3 {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(20px,-20px);
+        }
+      }
+      @keyframes ctx2shape4 {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(-20px,-20px);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="container"></div> 
-    <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
+    <div id="loading" class="load-animate">
+      <div class="ani-container ctx-2">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+        <div class="shape shape4"></div>
+      </div>
+      <span class="loading-text">拼命加载中...</span>
+    </div>
+    <div id="container"></div>  
+    <script src='/static/video.js'></script>
   </body>
 </html>

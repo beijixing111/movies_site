@@ -15,26 +15,7 @@
 			text-color="#fff"
 			active-text-color="#fff"
 			> 
-		  <el-menu-item v-for="item in dataRoute" :key="item.path" :index="item.path" :route="{path: item.path}"
-		   v-if="item.path != '/manager'">{{item.label}}</el-menu-item>
-		   <el-menu-item index="/manager" v-if="userInfo.loginStatus" :route="{path: '/manager'}">管理</el-menu-item>
-		  <!-- 
-		  <el-menu-item index="2" :route="{path: '/movies'}">电影</el-menu-item>
-		  <el-menu-item index="3" :route="{path: '/pics'}">图片</el-menu-item>
-		  
-		  <el-menu-item index="5" :route="{path: '/about'}">关于</el-menu-item> -->
-		  <!-- <el-submenu index="2">
-		    <template slot="title">我的工作台</template>
-		    <el-menu-item index="2-1">选项1</el-menu-item>
-		    <el-menu-item index="2-2">选项2</el-menu-item>
-		    <el-menu-item index="2-3">选项3</el-menu-item>
-		    <el-submenu index="2-4">
-		      <template slot="title">选项4</template>
-		      <el-menu-item index="2-4-1">选项1</el-menu-item>
-		      <el-menu-item index="2-4-2">选项2</el-menu-item>
-		      <el-menu-item index="2-4-3">选项3</el-menu-item>
-		    </el-submenu>
-		  </el-submenu> --> 
+		  <el-menu-item v-for="item in dataRoute" :key="item.path" :index="item.path" :route="{path: item.path}" >{{item.label}}</el-menu-item>
 		  
 		</el-menu>
 		<div class="login-info">
@@ -48,48 +29,43 @@
 
 <script>
 	import Login from '@/components/Login';
+	import { mapActions } from 'vuex';
   export default {
     data() {
       return {
-        activeIndex: '/', 
+        // activeIndex: '/', 
         visibility: false,
-        logoPic: './static/images/mimyz.png',
-        dataRoute: [
-        	{
-        		path: '/',
-        		label: '首页'
-        	},
-        	{
-        		path: '/movies',
-        		label: '电影'
-        	},{
-        		path: '/pics',
-        		label: '美图'
-        	},{
-        		path: '/manager',
-        		label: '管理'
-        	},{
-        		path: '/about',
-        		label: '关于'
-        	}
-        ] 
+        logoPic: './static/images/mimyz.png', 
       };
     },
     components: {
     	"mm-login": () => import("@/components/Login")
     },
-    mounted: function() {
+    mounted() {
     	this.chenckLogin();
-    	this.activeIndex = window.location.hash.replace('#', '');
+    	// this.getMenuInfo(); 
+    	this.updateRoutePath();
     },
     computed: {
+    	dataRoute() {
+    		return this.$store.state.menuinfo;
+    	},
     	userInfo() {
     		return this.$store.state.userInfo;
+    	},
+    	activeIndex() {
+    		console.log(this.$store.state.activeIndex);
+    		if(this.$store.state.activeIndex == '/index') {
+    			return '/';
+    		}
+    		return this.$store.state.activeIndex;
     	}
     },
     methods: {
+    	...mapActions(["updateRoutePath"]),
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+        this.updateRoutePath(key);
       },
       toggleLogin(bool) {
       	this.visibility = bool;
@@ -108,28 +84,21 @@
           });          
         });
       	
-      },
+      }, 
       chenckLogin() {
-      	let userInfo = localStorage.getItem("userInfo");
-      	if(userInfo){
-      		userInfo = JSON.parse(userInfo);
-      		this.$store.dispatch('login', userInfo); 
-      	}
+      	this.$store.dispatch('login');  
       }
     }
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.logo{
 		position: absolute;
-		left: 0;
-		top: 4px;
-		width: 120px;
-		height: 50px; 
+		left: 0; top: 4px;
+		width: 120px; height: 50px; 
 		border-radius: 5px;
-		z-index: 99; 
-		display: flex;
+		z-index: 99; display: flex;
 		justify-content: center;
 		align-items: center; 
 	}
@@ -178,6 +147,10 @@
     background: #519eff;
     color: #fff;
     border-radius: 5px;
+    &:hover{
+    	background: #2b83f1;
+    	box-shadow: 0 0 3px #fff;
+    }
  	}
  	
 </style>

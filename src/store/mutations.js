@@ -1,17 +1,21 @@
 import { Message } from 'element-ui';
 
 export const mutations = {
+	getMenuInfo (state, menuinfo) {
+		console.log(menuinfo);
+		state.menuinfo = menuinfo.data;
+	},
 	login (state, userinfo) {
-		console.log(state);
+		console.log(userinfo);
 		if(!userinfo.out){
 			state.userInfo = {
-				nickName: "北极星",
+				...userinfo,
 	      loginStatus: true
-	    }; 
+	    };  
 	    if(localStorage.getItem('userInfo')){
 	    	return;
 	    }
-	    localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
+	    localStorage.setItem('userInfo', JSON.stringify(state.userInfo)); 
 	    Message({ 
 	    	message: '登录成功！',
 	    	type: 'success',
@@ -58,5 +62,8 @@ export const mutations = {
 	getData (state, data ) {
 		console.log(data.data);
 		state.datas = data.data.data;
+	},
+	updateRoutePath (state, data) {
+		state.activeIndex = data.path;
 	}
 }

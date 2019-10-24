@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<router-view v-if="isRouterAlive" />
+		<!-- <router-view v-if="isRouterAlive" /> -->
+		<router-view  />
 		<div class="my-home" >
 			<movie-card :dataList="movieData.dataList" />
 		</div>
@@ -10,24 +11,17 @@
 <script>
 	import { mapActions } from 'vuex';
 	import { Loading } from 'element-ui';
-	import MovieCard from '@/components/MovieCard';
-	let loadingInstance;
+	import MovieCard from '@/components/MovieCard'; 
 	export default {
 		name: "Movies",
 		components: {
 			MovieCard
-		},
-		provide() {
-			return {
-				reload: this.reload
-			}
-		},
+		}, 
 	  data() {
 	    return { 
-				loading: true,
-				isRouterAlive:true
+				loading: true, 
 	    };
-	  }, 
+	  },  
 	  created () { 
 			this.getMovieData();
 			console.log(this.$router.history.current.params);
@@ -52,13 +46,7 @@
 	  	}
 	  },
 	  methods: {
-			...mapActions(["getMovieData"]),
-			reload (){
-       this.isRouterAlive = false
-       this.$nextTick(function(){
-          this.isRouterAlive = true
-       })
-    }
+			...mapActions(["getMovieData"]), 
 	  } 
 	}
 </script>

@@ -36,13 +36,13 @@
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 8px;
-	background-color: rgba(180,180,180,.4);
+	background-color: #7ad6e7;
     /*background-color: #96b97d;*/
 }
 
 ::-webkit-scrollbar-thumb:hover {
 	border-radius: 8px;
-	background-color: rgba(180,180,180,.5);
+	background-color: #519eff;
 }
 
 ::-webkit-scrollbar-track,::-webkit-scrollbar-thumb {

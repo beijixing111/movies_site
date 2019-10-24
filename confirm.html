@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MyConfirm DEMO</title> 
+</head>
+<body> 
+	<button id="demo01">alert</button>
+	<button id="demo02">confirm</button>
+	<script src="./MyConfirm.js"></script>
+	<script type="text/javascript">
+		
+		var demo01 = document.getElementById('demo01');
+		var demo02 = document.getElementById('demo02');
+
+		demo01.onclick = function() {
+			var second = new MyConfirm({
+				title: '提示',
+				message: '可以进行骚操作了', 
+				showCloseBtn: true,
+				maskerClose: true,
+				btns: [{
+					btnText: '知道了',
+					callback: function() { 
+						alert('知道了');
+					}
+				}]
+			});
+		};
+
+		demo02.onclick = function() {
+			var first = new MyConfirm({
+				title: '提示',
+				message: '确定要进行此操作么？',
+				maskerClose: false,
+				showCloseBtn: true,
+				btns: [{
+					btnText: '否',
+					callback: function() { 
+						alert('否');
+					}
+				}, {
+					btnText: '是',
+					callback: function() {
+						 alert('是');
+					}
+				}]
+			});
+		}; 
+		
+		
+	</script>
+</body>
+</html>

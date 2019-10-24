@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<el-row :gutter="20" class="clearfix">
-		  <el-col :span="6" v-for="(item, index) in dataList" :key="item.id" >
+		<el-row :gutter="5" class="clearfix">
+		  <el-col :span="4" v-for="(item, index) in dataList" :key="item.id" >
 		  	<router-link :to="'/movies/' + item.id" style="display: block;">
 			    <el-card :body-style="{ padding: '0px' }"> 
 			      <el-image :src="item.poster" class="wrapper">
@@ -35,6 +35,7 @@
 				ddd: ''
 			}
 		}
+		
 	}
 </script>
 
@@ -43,11 +44,11 @@
   	border-radius: 4px; margin-bottom: 20px;
   }
 	.el-card__body{
-  	height: 300px;
+  	height: 260px;
   	overflow: hidden;
   	position: relative;
   	.wrapper{
-			height: 100%; width: 100%;
+			width: 100%;
   	}
   	.movie-info{
   		position: absolute; 

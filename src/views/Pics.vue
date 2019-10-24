@@ -27,32 +27,7 @@
 	</div>
 </template>
 
-<script>
-
-	function factorial(n, total ) {
-	  if (n === 1) return total;
-	  return factorial(n - 1, n * total);
-	} 
-
-	function factorial1(n, start =1, total = 1) {
-		if(n <= 2) {
-			return total;
-		}
-		return factorial1(n-1, total, total + start);
-	}
-
-	let a = [1,2,3, [1,2,3, [1,2,3]]];
-	// 数组扁平实现
-	function flat(arr = [], result = []) {
-		arr.forEach(v => {
-			if(Array.isArray(v)) {
-				result = result.concat(flat(v, []))
-			}else{
-				result.push(v);
-			}
-		})
-		return result;
-	}
+<script> 
 
 	import { mapActions } from 'vuex';
 	export default {
@@ -117,7 +92,7 @@
   	border-radius: 4px; margin-bottom: 20px;
   }
   .pic-box{
-  	height: 300px; cursor: pointer;
+  	height: 260px; cursor: pointer;
   	overflow: hidden;
   }
   .bottom {
@@ -125,7 +100,7 @@
     line-height: 12px;
   }
 	.el-card__body{
-  	height: 300px;
+  	height: 260px;
   	overflow: hidden;
   	position: relative;
   	.wrapper{
