@@ -230,6 +230,7 @@
 			    		message: msg,
 	          	type: 'success'
 			    	});
+			    	this.handleRefresh();
 		      }else{
 		      	this.$message.error(msg);
 		      }  
@@ -251,6 +252,7 @@
 						console.log(res);
 						let { code, msg } = res.data;
 						this.$message.success(msg); 
+						this.handleRefresh();
 					})
 					.catch(err => {
 						this.$message.error("出现错误！"); 

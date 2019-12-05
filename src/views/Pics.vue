@@ -3,7 +3,7 @@
 		<el-row :gutter="20" class="clearfix">
 			  <el-col :span="6" v-for="(item, index) in picData.picList" :key="item.fileName" >
 			  	<el-card class="pic-box" :body-style="{ padding: '0px' }">  
-			      <el-image :src="item.fileSrc" @click="browerPic(item.fileSrc)" class="wrapper">
+			      <el-image :src="item.fileSrc" @click="browerPic(item.fileSrc)" class="wrapper" fit="cover">
 				      <div slot="placeholder" class="image-slot">
 				        加载中<span class="dot">...</span>
 				      </div>
@@ -37,7 +37,8 @@
 			return {
         dialogVisible: false,
         imgWidth: "400px",
-        picSrc: ''
+        picSrc: '',
+        size: ''
       };
 		},
 		created () { 
@@ -63,7 +64,7 @@
 	    	let image = new Image();
 	    	image.onload = () => {
 	    		// console.log(image.width);
-	    		let wid = image.width > 1200 ? 1200 : image.width;
+	    		let wid = image.width > 1200 ? 1200 : image.width; 
 	    		this.imgWidth = wid + 'px';
 	    		this.picSrc = src;
 	    		this.dialogVisible = true;
@@ -104,7 +105,7 @@
   	overflow: hidden;
   	position: relative;
   	.wrapper{
-			height: 100%; width: 100%;
+			height: 100%; width: 100%; 
   	}
   }	
   .button {

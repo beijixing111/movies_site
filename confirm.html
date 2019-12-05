@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>MyConfirm DEMO</title> 
+	<title>MyConfirm DEMO</title>  
 </head>
-<body> 
+<body>  
 	<button id="demo01">alert</button>
 	<button id="demo02">confirm</button>
 	<script src="./MyConfirm.js"></script>
@@ -12,6 +12,8 @@
 		
 		var demo01 = document.getElementById('demo01');
 		var demo02 = document.getElementById('demo02');
+
+		var str = '我是一个字符串！';
 
 		demo01.onclick = function() {
 			var second = new MyConfirm({
@@ -23,6 +25,7 @@
 					btnText: '知道了',
 					callback: function() { 
 						alert('知道了');
+						console.log(str);
 					}
 				}]
 			});

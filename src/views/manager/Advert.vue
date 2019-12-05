@@ -45,14 +45,7 @@
 
 <script>
 	import Axios from 'axios';
-	let options = {
-		"1": "恐怖",
-		"2": "爱情",
-		"3": "搞笑",
-		"4": "科幻",
-		"5": "原创",
-		"6": "其他"
-	};
+	 
 	export default {
 		name: 'Movie-upload',
 		data() { 

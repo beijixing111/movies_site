@@ -25,7 +25,7 @@
     data() {
       return {
         redSrc: '/static/images/red.jpg', 
-        ok: false
+        ok: true
       }
     },
     components: {
@@ -35,11 +35,26 @@
     computed: {
       message() {
         return this.$store.state.globalMsg
+      },
+      getLoginStatus() {
+        return this.$store.state.userInfo.loginStatus;
+      }
+    },
+    mounted() {
+      let nowhref = location.href;
+      this.closeAdvertising(nowhref);
+    },
+    watch:{
+      getLoginStatus(nelV, oldV){ 
+        this.closeAdvertising(nelV);
       }
     },
     methods: {
       handleClose() {
         console.log(123);
+      },
+      closeAdvertising(bool) { 
+        this.ok = !bool; 
       }
     }
   }

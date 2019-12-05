@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  	*{
+  		margin: 0; padding: 0;
+  	}
+  	ul,li{
+  		list-style: none;
+  	}
+  	i,em{
+  		font-style: normal;
+  	}
+    a{
+      color: #333;
+      text-decoration: none;
+      &:active,&:hover,&:link,&:visited{
+        color: green;
+      }
+    }
+  	.show-panel{
+			margin-bottom: 5px;
+			display: flex; justify-content: space-between;
+			align-items: center;
+      overflow: hidden;
+  	}
+  	.headimg{
+			display: flex; flex: none; 
+			width: 80px; height: 100px; 
+			background: #ccc; 
+  	}
+  	.show-panel .info{
+			height: 100px; flex: auto; margin-left: 5px;
+  	}
+  	.show-panel .info .nickname{ 
+			font-size: 16px; padding: 10px ; border-bottom: 1px solid #ccc;
+      overflow: hidden; text-overflow: ellipsis;
+      white-space: nowrap; width: 128px;
+  	}
+  	.show-panel .info .card{
+  		padding: 8px 0; text-align: center;
+      display: flex; justify-content: space-between;
+  	}
+  	.show-panel .info .card a{
+  		display: flex; width: 50%; height: 50px; 
+      justify-content: flex-start; align-items: center;
+  	}
+  	.show-panel .info .card a img{
+  		display: inline-block; margin-right: 5px;
+  		vertical-align: middle; width: 16px; height: 16px;
+      background: #ccc; cursor: pointer;
+  	}
+  	.show-panel .info .card a span{
+  		display: inline-block; font-size: 12px; 
+      font-weight: bold;
+  	}
+
+  	.daiban{
+  		background: #edecec; height: 65px;
+  		padding: 5px 0;
+  	}
+  	.daiban ul{  
+  		width: 100%; height: 100%;
+      display: flex; flex-wrap: wrap;
+  	}
+  	.daiban ul li{
+  		display: flex; justify-content: flex-start; 
+  		align-items: center; width: 50%;
+  		height: 30px; 
+  	}
+  	.daiban ul li a{ 
+			display: flex; justify-content: flex-start;
+      align-items: center;
+  	}
+  	.daiban ul li a img{ 
+			width: 16px; height: 16px;
+			display: inline-block; margin: 0 4px;
+      background: #fff; border-radius: 3px;
+  	}
+  	.daiban ul li a span{
+  		display: inline-block; font-size: 12px;
+  		color: #333; 
+  	} 
+  	.daiban ul li a span i{ 
+			color: #f44646;
+  	}
+
+  </style>
+</head> 
+<body>
+  <div class="group">
+    <div>
+      <div style=" width: 246px;background: #fff;">
+        <div class="header" data-issetting="false" data-sharelevel="2" style="
+        cursor: move;width: auto;background: #3e7acf;position: relative;height: 30px;border-top: 1px solid #055792; box-sizing: content-box;">
+        	<span class="wea-f12 title" id="" style="position: absolute;line-height: 1;left: 10px;top: 8px;color: #fff; font-size: 12px;">
+            <font class="title-font" id="">个人信息</font>
+          </span>
+          <span class="toolbar" style="position: absolute;top: 9px;right: 5px;">
+            <ul>
+              <li style="width: 34px;"><a id="" href="javascript:void(0);"><img class="img_more" id="imgMore" border="0" src="/page/resource/userfile/image/synergy/more_wev8.png" title="更多" alt=""></a></li>
+            </ul>
+          </span>
+        </div>
+        <div class="content" style="border: 1px solid #dbdbdb;border-top: 0;padding: 5px;">
+          <div style="height: 180px;">
+          	<div class="show-panel">
+          		<img src="" alt="头像" title="头像" class="headimg" />
+          		<div class="info">
+          			<div class="nickname">您好，北极星</div>
+          			<div class="card">
+          				<a href="" >
+          					<img src="" alt="" />
+          					<span>我的卡片</span>
+          				</a>
+          				<a href="#">
+          					<img src="" alt="" />
+          					<span>通讯录</span>
+          				</a>
+          			</div>
+          		</div>
+          	</div>
+          	<div class="daiban">
+          		<ul>
+          			<li>
+          				<a href="">
+          					<img src="" alt="" />
+          					<span>我的待办<i>（11）</i></span>
+          				</a>
+          			</li>
+          			<li>
+          				<a href="">
+          					<img src="" alt="" />
+          					<span>我的待阅<i>（11）</i></span>
+          				</a>
+          			</li>
+          			<li>
+          				<a href="">
+          					<img src="" alt="" />
+          					<span>其他待办<i>（11）</i></span>
+          				</a>
+          			</li>
+          		</ul>
+          	</div>
+          </div>
+        </div>
+      </div>
+      <div class="item" id="item_5442" data-eid="5442" data-ebaseid="imgSlide" data-needrefresh="true" data-cornertop="Right" data-cornertopradian="8px" data-cornerbottom="Right" data-cornerbottomradian="5px" style="margin: 10px 0px 0px;position: relative;margin-left: 256px;">  
+      </div>
+    </div>
+    <div class="item"></div>
+  </div>
+</body>
+
+</html>

@@ -49,6 +49,10 @@
 		          用户列表</el-menu-item> 
 		        </el-menu-item-group>
 		      </el-submenu>
+		      <el-menu-item index="5" :route="{path: 'advert'}">
+		        <i class="el-icon-reading"></i>
+		        <span slot="title">广告管理</span>
+		      </el-menu-item>
 		      
 		    </el-menu>
 		  </el-col>

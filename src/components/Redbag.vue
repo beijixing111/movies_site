@@ -1,7 +1,6 @@
 <template>
 	<div v-show="ok">
-		<div class="fixed-ctx fixed-rig " > 
-			<p>扫码有红包和惊喜哦！</p>
+		<div class="fixed-ctx fixed-rig " >  
 			<img :src="redpic" alt="红包"> 
 		</div>
 		<!-- <div class="fixed-ctx fixed-le">
@@ -17,7 +16,7 @@
 		props: {
 			ok: Boolean,
 			redpic: String
-		} 
+		}
 	}
 </script>
 
@@ -26,7 +25,7 @@
 		position: fixed; 
 		top: 50%;
 		transform: translateY(-50%);
-		width: 150px;
+		width: 140px;
 		border-radius: 5px;
 		background: #fff;
 		&.fixed-le{

@@ -1,15 +1,4 @@
-;(function(undefined) {
-  "use strict"; //使用js严格模式检查，是语法更规范
-  var _global;
-
-  /**
-		title 弹窗标题
-		message 弹窗文本信息
-		btns  弹窗按钮数组
-		showCloseBtn 是否显示右上角关闭按钮，默认true
-		maskerClose  是否点击遮罩层关闭, 默认false
-  */ 
-  function MyConfirm (config) {
+function MyConfirm (config) {
 		this.title = config.title ? config.title : '提示';
 		this.btns = config.btns;
 		this.message = config.message;
@@ -95,7 +84,7 @@
 			this.topWindow.document.body.appendChild(container);  
 		},
 		initStyle: function() {
-			var myConfirmStyle ='.myconfirm-container .myconfirm-masker{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;opacity:.5;background:#000}.myconfirm{position:absolute;left:50%;top:50%;width:380px;height:180px;z-index:1000000;margin:-90px -190px;overflow:hidden;background:#fff;box-sizing:border-box;box-shadow:0 0 3px #ccc;border-radius:5px}.myconfirm .close-myconfirm{position:absolute;right:10px;top:10px;width:20px;height:20px;line-height:20px;text-align:center;font-size:22px;color:#ccc;cursor:pointer}.myconfirm .close-myconfirm:hover{color:#333}.myconfirm .myconfirm-title{height:40px;line-height:40px;text-align:center;font-size:16px;color:#888;overflow:hidden;padding:0 30px;white-space:nowrap;text-overflow:ellipsis}.myconfirm .myconfirm-context{padding:10px 20px 0;height:60px;display:table;text-align:center;width:340px}.myconfirm .myconfirm-context p{text-align:center;font-size:15px;line-height:28px;margin:0;display:table-cell;vertical-align:middle}.myconfirm .myconfirm-footer{position:absolute;bottom:0;width:100%;left:0;text-align:center;height:56px}.myconfirm .myconfirm-footer a{display:inline-block;padding:8px 20px;margin:0 15px;border-radius:3px;font-size:14px;min-width:30px;text-decoration:none;cursor:pointer}.myconfirm .myconfirm-footer a.default{background:#fff;border:1px solid #ccc;color:#888}.myconfirm .myconfirm-footer a.default:hover{border-color:#3a8ee6;color:#3a8ee6;background:#d9fce7}.myconfirm .myconfirm-footer a.sure{background:#409eff;border:1px solid #409eff;color:#fff}.myconfirm .myconfirm-footer a.sure:hover{background:#2c90f8;border:1px solid #2c90f8;color:#fff}'; 
+			var myConfirmStyle ='.myconfirm-container .myconfirm-masker{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;opacity:.5;filter:Alpha(opacity=50);background:#000}.myconfirm{position:absolute;left:50%;top:50%;width:380px;height:180px;z-index:1000000;margin:-90px -190px;overflow:hidden;background:#fff;box-sizing:border-box;box-shadow:0 0 3px #ccc;border-radius:5px}.myconfirm .close-myconfirm{position:absolute;right:10px;top:10px;width:20px;height:20px;line-height:20px;text-align:center;font-size:22px;color:#ccc;cursor:pointer}.myconfirm .close-myconfirm:hover{color:#333}.myconfirm .myconfirm-title{height:40px;line-height:40px;text-align:left;font-size:16px;color:#888;overflow:hidden;padding:0 30px;white-space:nowrap;text-overflow:ellipsis}.myconfirm .myconfirm-context{padding:10px 20px 0;height:60px;display:table;text-align:center;width:340px}.myconfirm .myconfirm-context p{text-align:center;font-size:15px;line-height:28px;margin:0;display:table-cell;vertical-align:middle}.myconfirm .myconfirm-footer{position:absolute;bottom:0;width:100%;left:0;text-align:center;height:56px;background:#f0f0f0}.myconfirm .myconfirm-footer a{display:inline-block;padding:8px 20px;margin:10px 15px;border-radius:4px;font-size:14px;min-width:30px;text-decoration:none;cursor:pointer}.myconfirm .myconfirm-footer a.default{background:#fefefe;border:1px solid #ccc;color:#888}.myconfirm .myconfirm-footer a.default:hover{border-color:#ccc;color:#333;background:#f5f5f5}.myconfirm .myconfirm-footer a.sure{background:#c2e1f2;border:1px solid #27cffa;color:#000}.myconfirm .myconfirm-footer a.sure:hover{background:#b2dcf3;border:1px solid #1ecdfa;color:#000}';
 			var sty = document.createElement('style');
 			sty.type = 'text/css'; 
 			if(sty.styleSheet){
@@ -119,19 +108,3 @@
 			return this.topWindow.document.getElementById(id);
 		}
 	}
-
-		 //最后将插件对象暴露给全局对象
-  _global = (function() {
-    return this || (0, eval)('this');
-  }());
-
-  if (typeof module !== "undefined" && module.exports) {
-    module.exports = MyConfirm;
-  } else if (typeof define === "function" && define.amd) {
-    define(function() {
-      return MyConfirm;
-    });
-  } else {
-    !('MyConfirm' in _global) && (_global.MyConfirm = MyConfirm);
-  }
-})();

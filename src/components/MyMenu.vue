@@ -128,8 +128,8 @@
 		padding-left: 140px !important; 
  	}
  	.el-menu-item{
- 		font-size: 16px;
- 	}
+ 		font-size: 16px; min-width: 90px;
+ 	} 
  	.login-info{
 		position: absolute;
 		right: 0;

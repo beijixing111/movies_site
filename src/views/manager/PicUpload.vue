@@ -61,10 +61,13 @@
         }, {
         	value: '4',
         	label: '美女'
+        }, {
+        	value: '5',
+        	label: '广告'
         }],
         value: '1',
         uploader: '北极星',
-        desc: '啦啦啦啦啦'
+        desc: ''
 			}
 		},
 		methods: {
@@ -76,6 +79,14 @@
       },
       uploadSuccess(response, file, fileList) {
       	console.log(response, file, fileList);
+      	let {code, msg} = response;
+      	if(response.code == 1) {
+      		this.$message({
+		    		message: msg,
+          	type: 'success'
+		    	}); 
+		    	this.desc = '';
+      	}
       },
       uploadErr(err, file, fileList){
       	console.log(err, file, fileList);

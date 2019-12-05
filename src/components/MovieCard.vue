@@ -10,10 +10,10 @@
 				      </div>
 				    </el-image>
 			    	<div class="movie-info">
-			    		<p>{{item.name}}</p> 
+			    		<p>{{!item.name ? '未知' : item.name}}</p> 
 			    		<p>
-			    			<span>类型：{{item.type}}</span>
-			    			<span>导演：{{item.owner}}</span>
+			    			<span>类型：{{item.type? item.type : '其他'}}</span>
+			    			<span>导演：{{item.owner? item.owner : '未知'}}</span>
 			    		</p>
 							<div class="desc-text">简介：{{!!item.desc ? item.desc : "暂无信息..."}}</div> 
 			    	</div> 
@@ -43,6 +43,15 @@
 	.el-col{
   	border-radius: 4px; margin-bottom: 20px;
   }
+  .el-card {
+  	border: none !important;
+  	&:hover { 
+	    box-shadow: 0 2px 12px 0 rgba(81, 158, 255, 0.86) !important;
+  	}
+  	&:hover .movie-info{
+			transform: translateY(0);
+		}	
+  }
 	.el-card__body{
   	height: 260px;
   	overflow: hidden;
@@ -52,17 +61,16 @@
   	}
   	.movie-info{
   		position: absolute; 
-  		left: 0;
-			right: 0;
-			bottom: 0;
-  		height: 90px;
+  		left: 0; right: 0;
+			bottom: 0; height: 50%;
   		box-sizing: border-box;
-  		display: flex;
-  		flex: 1;
+  		display: flex; flex: 1;
   		flex-direction: column;
-  		background: rgba(0,0,0,.5);
+  		background: rgba(0,0,0,.35);
   		color: #fff;
-			padding: 10px 15px; 
+			padding: 10px 5px; 
+			transform: translateY(70%);
+			transition: all .3s ease-in; 
   		p{
   			font-size: 14px; line-height: 20px; 
   			margin-bottom: 8px;

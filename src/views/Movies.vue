@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- <router-view v-if="isRouterAlive" /> -->
-		<router-view  />
+		<router-view />
 		<div class="my-home" >
 			<movie-card :dataList="movieData.dataList" />
 		</div>
@@ -26,24 +26,28 @@
 			this.getMovieData();
 			console.log(this.$router.history.current.params);
 	  },
+	  watch:{
+      $route(to,from){
+        this.getMovieData(); 
+      }
+    },
 	  computed: {
 	  	movieData() { 
 	  		let id = this.$router.history.current.params.id;
-	  		let movieList = [];
-				this.$store.state.movieList.map(item => {
-					if(!item.poster) {
-						item.poster = './static/images/default_movie.png';
-					}
-					if(item.id != id){
-						movieList.push(item);
-					}
-				});
-				  
+	  		console.log('AAAAAA', id);
+	  		let movieList = this.$store.state.movieList;
+	  		if(id) {
+	  			movieList = movieList.filter(item => item.id != id); 
+	  		} 
+				movieList = movieList.map(item => { 
+					item.poster = !!item.poster ? item.poster : './static/images/default_movie.png'; 
+					return item;
+				}); 
 	  		return {
 	  			total: movieList.length,
 	  			dataList: movieList
 	  		}
-	  	}
+	  	} 
 	  },
 	  methods: {
 			...mapActions(["getMovieData"]), 

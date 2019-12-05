@@ -3,7 +3,7 @@
 		<h3>关于</h3>
 		<p>{{desc}}</p> 
 		<button class="ripple" type="button" > 
-			<span>按钮</span>
+			<span>小测试</span>
 		</button>
 	</div>
 </template>
