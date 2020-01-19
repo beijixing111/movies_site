@@ -5,7 +5,8 @@
 		</div>
 		<!-- <div class="fixed-ctx fixed-le">
 			<p>扫码有红包，更有惊喜哦！</p>
-			<img :src="redpic" alt="红包"> 
+			<img :src="redpic" alt="红包">   
+			zcbm   zcfl-zcmc1   zcxh  jzgs
 		</div> -->
 	</div> 
 </template>
